@@ -36,8 +36,8 @@ jobs:
       with:
         path: |
           ~/.buildozer
-          .buildozer
-        key: buildozer-${{ runner.os }}-${{ hashFiles('buildozer.spec') }}
+          Gomoku/.buildozer
+        key: buildozer-${{ runner.os }}-${{ hashFiles('Gomoku/buildozer.spec') }}
 
     - name: Install Buildozer
       run: |
@@ -45,6 +45,7 @@ jobs:
         pip install buildozer cython==0.29.36
 
     - name: Build with Buildozer
+      working-directory: Gomoku
       run: |
         yes | buildozer -v android debug
 
@@ -52,4 +53,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: gomoku-apk
-        path: bin/*.apk
+        path: Gomoku/bin/*.apk
